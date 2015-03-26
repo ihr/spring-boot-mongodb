@@ -21,22 +21,21 @@ package org.ingini.spring.boot.mongodb.security;
 
 import org.ingini.spring.boot.mongodb.domain.Client;
 import org.jongo.MongoCollection;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Service;
 
+@Service
 public class MongoDBAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
 
+    @Autowired
     private MongoCollection users;
-
-    public MongoDBAuthenticationProvider(MongoCollection users) {
-        this.users = users;
-    }
-
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {

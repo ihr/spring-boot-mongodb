@@ -28,6 +28,6 @@ import java.io.IOException;
 public class GrantedAuthorityDeserializer extends JsonDeserializer<SimpleGrantedAuthority> {
     @Override
     public SimpleGrantedAuthority deserialize(JsonParser jp, DeserializationContext ctxt) throws IOException {
-        return new SimpleGrantedAuthority("ROLE_" + jp.getValueAsString());
+        return new SimpleGrantedAuthority(jp.getValueAsString());
     }
 }

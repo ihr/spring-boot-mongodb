@@ -21,7 +21,6 @@ package org.ingini.spring.boot.mongodb;
 import com.mongodb.DB;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import org.ingini.spring.boot.mongodb.security.MongoDBAuthenticationProvider;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.springframework.boot.SpringApplication;
@@ -54,8 +53,4 @@ public class InginiMain {
         return jongo().getCollection("users");
     }
 
-    @Bean
-    public MongoDBAuthenticationProvider authenticationProvider() {
-        return new MongoDBAuthenticationProvider(users());
-    }
 }
