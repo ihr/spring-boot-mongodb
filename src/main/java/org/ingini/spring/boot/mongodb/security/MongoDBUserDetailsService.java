@@ -23,27 +23,22 @@ import org.ingini.spring.boot.mongodb.domain.Client;
 import org.jongo.MongoCollection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.InternalAuthenticationServiceException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
-public class MongoDBAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+public class MongoDBUserDetailsService implements UserDetailsService {
 
 
     @Autowired
     private MongoCollection users;
 
-    @Override
-    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-
-    }
 
     @Override
-    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         UserDetails loadedUser;
 
         try {

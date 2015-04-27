@@ -18,7 +18,7 @@
 
 package org.ingini.spring.boot.mongodb.config;
 
-import org.ingini.spring.boot.mongodb.security.MongoDBAuthenticationProvider;
+import org.ingini.spring.boot.mongodb.security.MongoDBUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.context.annotation.Configuration;
@@ -38,7 +38,7 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private MongoDBAuthenticationProvider authenticationProvider;
+    private MongoDBUserDetailsService mongoDBUserDetailsService;
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -57,6 +57,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.authenticationProvider(authenticationProvider);
+        auth.userDetailsService(mongoDBUserDetailsService);
     }
 }
